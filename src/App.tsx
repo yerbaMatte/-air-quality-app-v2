@@ -1,6 +1,6 @@
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Map } from './components/Map/Map';
-import { gridProps } from './components/Map/grid_settings';
+import { gridProps } from './components/UI/grid_settings';
 
 function App() {
   return (
