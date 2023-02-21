@@ -11,7 +11,7 @@ function App() {
       <GridItem bg="#b8dbd9" area={'control-side'}>
         control-side
       </GridItem>
-      <GridItem bg="black" area={'map-side'}>
+      <GridItem bg="#000" area={'map-side'}>
         <Map />
       </GridItem>
       <GridItem bg="#586f7c" area={'footer'}>
