@@ -1,4 +1,4 @@
-export const gridProps = {
+export const gridSettings = {
   templateAreas: `"header header"
                   "control-side map-side"
                   "footer footer"`,

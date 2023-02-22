@@ -1,7 +1,6 @@
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import './Map.css';
-import React from 'react';
-
+import DataFetecher from '../Hooks/DataFetcher';
 export const Map = () => {
   return (
     <MapContainer
@@ -11,8 +10,14 @@ export const Map = () => {
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
       />
+      <Marker position={[52.237049, 21.017532]}>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
+      </Marker>
+      <DataFetecher />
     </MapContainer>
   );
 };
