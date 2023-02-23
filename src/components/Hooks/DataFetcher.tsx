@@ -5,11 +5,11 @@ import { convertLatLngToTiles } from '../HelperFunctions/convertLatLng';
 const DataFetcher = () => {
   // const warsawTiles = convertLatLngToTiles(52.237049, 21.017532, 10);
 
-  const fetchAxios = async (data: string) => {
-    const response = await axios.get(data);
-    const quizData = response.data;
-    return quizData;
-  };
+  // const fetchAxios = async (data: string) => {
+  //   const response = await axios.get(data);
+  //   const quizData = response.data;
+  //   return quizData;
+  // };
 
   const { data, isSuccess } = useQuery('AirData', async () => {
     const response = await axios.get(
