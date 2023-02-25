@@ -1,25 +1,33 @@
-import { fetchData } from './../../Hooks/DataFetcher';
+import { DataFetcher } from './../../Hooks/DataFetcher';
 import { Marker, useMap } from 'react-leaflet';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useQueryClient, useQuery } from 'react-query';
 
 function GetTiles() {
+  const { data, isError, isSuccess } = useQuery('Tailes', DataFetcher);
+
   const map = useMap();
   const bounds = map.getBounds();
-  const [data, setData] = useState(null);
+  // Extract the coordinates from the bounds object
+  const southWest = [bounds.getSouth(), bounds.getWest()];
+  const northEast = [bounds.getNorth(), bounds.getEast()];
 
-  let southWest = [bounds._southWest.lat, bounds._southWest.lng];
-  let northEast = [bounds._northEast.lat, bounds._northEast.lng];
+  // Call the fetchAirData function on mount and whenever the bounds change
+  // useEffect(() => {
+  //   fetchAirData();
+  // }, [bounds]);
 
-  const fetchAirData = async () => {
-    const airData = await fetchData(southWest, northEast);
-    setData(airData);
-  };
-
-  // fetchAirData();
-
+  // Render the map tiles and markers based on the fetched data
   return (
     <>
-      <Marker position={[51.274880130680536, 20.090660095214847]} />
+      {Array.isArray(data) &&
+        data.map((datum) => (
+          <Marker
+            key={datum.uid}
+            position={[datum.lat, datum.lon]}
+            icon={getMarkerIcon(datum.aqi)}
+          />
+        ))}
     </>
   );
 }
