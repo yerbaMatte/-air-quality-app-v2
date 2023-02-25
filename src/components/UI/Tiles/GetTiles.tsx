@@ -8,26 +8,7 @@ function GetTiles() {
   const bounds = map.getBounds();
   const southWest = [bounds.getSouth(), bounds.getWest()];
   const northEast = [bounds.getNorth(), bounds.getEast()];
-  // let bounds: object;
-  // let southWest: number[];
-  // let northEast: number[];
 
-  useEffect(() => {
-    const onMoveEnd = async () => {
-      const bounds = map.getBounds();
-      const southWest = [bounds.getSouth(), bounds.getWest()];
-      const northEast = [bounds.getNorth(), bounds.getEast()];
-      const newData = await dataFetcher(southWest, northEast);
-      queryClient.setQueryData(['Tailes'], newData);
-    };
-    map.on('moveend', onMoveEnd);
-
-    return () => {
-      map.off('moveend', onMoveEnd);
-    };
-  }, [map]);
-
-  console.log(bounds, southWest, northEast);
   const queryClient = useQueryClient();
 
   const {
@@ -66,7 +47,23 @@ function GetTiles() {
     );
   }
 
-  console.log(tilesData?.data);
+  useEffect(() => {
+    const onMoveEnd = async () => {
+      const bounds = map.getBounds();
+      const southWest = [bounds.getSouth(), bounds.getWest()];
+      const northEast = [bounds.getNorth(), bounds.getEast()];
+      const newData = await dataFetcher(southWest, northEast);
+      queryClient.setQueryData(['Tailes'], newData);
+    };
+
+    map.on('moveend', onMoveEnd);
+
+    return () => {
+      map.off('moveend', onMoveEnd);
+    };
+  }, [map]);
+
+  // console.log(tilesData?.data);
 
   return <>{tilesData && renderedTiles}</>;
 }
