@@ -8,7 +8,7 @@ function App() {
     <>
       <ChakraProvider>
         <QueryClientProvider client={queryClient}>
-          <GridLayout></GridLayout>
+          <GridLayout />
         </QueryClientProvider>
       </ChakraProvider>
     </>
