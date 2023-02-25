@@ -3,6 +3,7 @@ import './Map.css';
 import GetTiles from '../UI/Tiles/GetTiles';
 
 export const Map = () => {
+  console.log('Map');
   return (
     <MapContainer
       center={[52.237049, 21.017532]}
