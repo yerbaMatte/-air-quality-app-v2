@@ -1,6 +1,7 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import './Map.css';
 import GetTiles from '../UI/Tiles/GetTiles';
+import L from 'leaflet';
 
 export const Map = () => {
   console.log('Map');
@@ -13,7 +14,7 @@ export const Map = () => {
       <GetTiles />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-        url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+        url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
       />
     </MapContainer>
   );

@@ -1,7 +1,12 @@
-import { dataFetcher } from './../../Hooks/dataFetcher';
+import { dataFetcher } from '../../HelperFunctions/dataFetcher';
 import { Marker, useMap } from 'react-leaflet';
 import React, { useState, useEffect } from 'react';
 import { useQueryClient, useQuery, QueryClient } from 'react-query';
+import {
+  renderedTiles,
+  createTiles,
+  renderTiles,
+} from './../../HelperFunctions/createTiles';
 
 function GetTiles() {
   const map = useMap();
@@ -19,32 +24,9 @@ function GetTiles() {
     initialData: undefined,
   });
 
-  type Tile = {
-    lat: number;
-    lon: number;
-    uid: number;
-  };
-
-  // uid -> "Unique Station ID"
-  const createTiles = (tile: Tile) => (
-    <Marker key={tile.uid} position={[tile.lat, tile.lon]} />
-  );
-
-  let renderedTiles: JSX.Element | undefined;
-
-  if (tilesData) {
-    const tiles = tilesData.data;
-    renderedTiles = (
-      <>
-        {tiles.map((tile: Tile) =>
-          createTiles({
-            lat: tile.lat,
-            lon: tile.lon,
-            uid: tile.uid,
-          })
-        )}
-      </>
-    );
+  //Create markers with
+  if (isSuccess) {
+    renderTiles(tilesData);
   }
 
   useEffect(() => {
@@ -63,7 +45,7 @@ function GetTiles() {
     };
   }, [map]);
 
-  // console.log(tilesData?.data);
+  console.log(tilesData);
 
   return <>{tilesData && renderedTiles}</>;
 }
