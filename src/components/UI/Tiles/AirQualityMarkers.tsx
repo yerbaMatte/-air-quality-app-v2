@@ -20,6 +20,7 @@ function GetTiles() {
     initialData: undefined,
   });
 
+  if (isError) console.log('error');
   //Create markers with @renderMarker function
   let renderedMarkers: JSX.Element | undefined;
   if (isSuccess) {

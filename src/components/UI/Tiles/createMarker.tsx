@@ -1,72 +1,38 @@
 import { Marker } from 'react-leaflet';
 import ReactDOMServer from 'react-dom/server';
+import SVGIcon from './qualityIconHTML';
+import qualityIconColor from './qualityIconColor';
 import L from 'leaflet';
 
-function SVGIconComponent({ perc = 0 }) {
-  return (
-    <svg
-      width='45px'
-      height='45px'
-      viewBox='0 0 42 42'
-      className='donut'
-      aria-labelledby='beers-title beers-desc'
-      role='img'
-    >
-      <circle
-        className='donut-hole'
-        cx='21'
-        cy='21'
-        r='15.91549430918954'
-        fill='white'
-        role='presentation'
-      ></circle>
-      <circle
-        className='donut-ring'
-        cx='21'
-        cy='21'
-        r='15.91549430918954'
-        fill='transparent'
-        stroke='#d2d3d4'
-        strokeWidth='3'
-        role='presentation'
-      ></circle>
-      <circle
-        className='donut-segment'
-        cx='21'
-        cy='21'
-        r='15.91549430918954'
-        fill='transparent'
-        stroke='#d70202'
-        strokeWidth='3'
-        strokeDasharray={`${perc} ${100 - perc}`}
-        strokeDashoffset='25'
-        aria-labelledby='donut-segment-1-title donut-segment-1-desc'
-      ></circle>
-      <g className='chart-text'>
-        <text className='chart-number' x='50%' y='60%' textAnchor='middle'>
-          {perc}
-        </text>
-      </g>
-    </svg>
-  );
-}
-
 type MarkerType = {
+  // latitude and longitude
   lat: number;
   lon: number;
+  // uid -> "Unique Station ID"
   uid: number;
+  // aqi -> "air quality index - the result"
+  aqi: string;
 };
 
-const icon = L.divIcon({
-  className: 'custom-icon',
-  html: ReactDOMServer.renderToString(<SVGIconComponent perc={100} />),
-});
+// develop a single custom AQI marker Element
+const createMarkerElement = (tile: MarkerType) => {
+  const aqiNumber = parseInt(tile.aqi, 10);
+  // if the given measuring station does not have a result - skip this station
+  if (!aqiNumber) return;
+  // determine the marker color based on aqi index
+  const colorString = qualityIconColor(aqiNumber);
+  // create custom marker
+  const icon = L.divIcon({
+    className: 'custom-icon',
+    html: ReactDOMServer.renderToString(
+      <SVGIcon perc={aqiNumber} iconColor={colorString} />
+    ),
+  });
 
-// uid -> "Unique Station ID"
-const createMarkerElement = (tile: MarkerType) => (
-  <Marker key={tile.uid} position={[tile.lat, tile.lon]} icon={icon} />
-);
+  return <Marker key={tile.uid} position={[tile.lat, tile.lon]} icon={icon} />;
+};
 
+// create JSX element with all fetched markers data
 export const renderMarker = (tilesData: { data: MarkerType[] }) => {
   const tiles = tilesData.data;
   return (
@@ -76,6 +42,7 @@ export const renderMarker = (tilesData: { data: MarkerType[] }) => {
           lat: tile.lat,
           lon: tile.lon,
           uid: tile.uid,
+          aqi: tile.aqi,
         })
       )}
     </>
