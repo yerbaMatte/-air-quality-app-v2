@@ -20,13 +20,6 @@ function GetTiles() {
     initialData: undefined,
   });
 
-  if (isError) console.log('error');
-  //Create markers with @renderMarker function
-  let renderedMarkers: JSX.Element | undefined;
-  if (isSuccess) {
-    renderedMarkers = renderMarker(tilesData);
-  }
-
   useEffect(() => {
     // when the map's movement ends, get the new bounds and matching markers
     const onMoveEnd = async () => {
@@ -42,10 +35,8 @@ function GetTiles() {
       map.off('moveend', onMoveEnd);
     };
   }, [map]);
-
-  console.log(tilesData);
-
-  return <>{isSuccess && renderedMarkers}</>;
+  // isSuccess === true ? render all aqi markers at the area
+  return <>{isSuccess && renderMarker(tilesData)}</>;
 }
 
 export default GetTiles;

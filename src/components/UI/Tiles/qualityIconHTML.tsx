@@ -4,6 +4,7 @@ type SVGIconProps = {
 };
 
 export default function SVGIcon({ perc, iconColor }: SVGIconProps) {
+  const scaledValue = (perc / 200) * 100;
   return (
     <svg
       width='45px'
@@ -39,7 +40,7 @@ export default function SVGIcon({ perc, iconColor }: SVGIconProps) {
         fill='transparent'
         stroke={iconColor}
         strokeWidth='3'
-        strokeDasharray={`${perc} ${100 - perc}`}
+        strokeDasharray={`${scaledValue} ${100 - scaledValue}`}
         strokeDashoffset='25'
         aria-labelledby='donut-segment-1-title donut-segment-1-desc'
       ></circle>
