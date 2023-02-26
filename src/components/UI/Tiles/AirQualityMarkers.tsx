@@ -12,13 +12,13 @@ function GetTiles() {
 
   const queryClient = useQueryClient();
 
-  const {
-    data: tilesData,
-    isError,
-    isSuccess,
-  } = useQuery(['Tailes'], () => dataFetcher(southWest, northEast), {
-    initialData: undefined,
-  });
+  const { data: tilesData, isSuccess } = useQuery(
+    ['Tailes'],
+    () => dataFetcher(southWest, northEast),
+    {
+      initialData: undefined,
+    }
+  );
 
   useEffect(() => {
     // when the map's movement ends, get the new bounds and matching markers
