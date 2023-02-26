@@ -14,7 +14,7 @@ type MarkerType = {
   aqi: string;
 };
 
-// develop a single custom AQI marker Element
+// develop a single custom AQI Marker Element
 const createMarkerElement = (tile: MarkerType) => {
   const aqiNumber = parseInt(tile.aqi, 10);
   // if the given measuring station does not have a result - skip this station
