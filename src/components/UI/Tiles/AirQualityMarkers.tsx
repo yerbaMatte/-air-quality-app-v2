@@ -1,12 +1,8 @@
 import { dataFetcher } from '../../HelperFunctions/dataFetcher';
-import { Marker, useMap } from 'react-leaflet';
-import React, { useState, useEffect } from 'react';
+import { useMap } from 'react-leaflet';
+import { useEffect } from 'react';
 import { useQueryClient, useQuery, QueryClient } from 'react-query';
-import {
-  renderedTiles,
-  createTiles,
-  renderTiles,
-} from './../../HelperFunctions/createTiles';
+import { renderMarker } from './createMarker';
 
 function GetTiles() {
   const map = useMap();
@@ -24,12 +20,14 @@ function GetTiles() {
     initialData: undefined,
   });
 
-  //Create markers with
+  //Create markers with @renderMarker function
+  let renderedMarkers: JSX.Element | undefined;
   if (isSuccess) {
-    renderTiles(tilesData);
+    renderedMarkers = renderMarker(tilesData);
   }
 
   useEffect(() => {
+    // when the map's movement ends, get the new bounds and matching markers
     const onMoveEnd = async () => {
       const bounds = map.getBounds();
       const southWest = [bounds.getSouth(), bounds.getWest()];
@@ -37,7 +35,6 @@ function GetTiles() {
       const newData = await dataFetcher(southWest, northEast);
       queryClient.setQueryData(['Tailes'], newData);
     };
-
     map.on('moveend', onMoveEnd);
 
     return () => {
@@ -47,7 +44,7 @@ function GetTiles() {
 
   console.log(tilesData);
 
-  return <>{tilesData && renderedTiles}</>;
+  return <>{isSuccess && renderedMarkers}</>;
 }
 
 export default GetTiles;

@@ -1,7 +1,6 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import './Map.css';
-import GetTiles from '../UI/Tiles/GetTiles';
-import L from 'leaflet';
+import AirQualityMarkers from '../UI/Tiles/AirQualityMarkers';
 
 export const Map = () => {
   console.log('Map');
@@ -11,7 +10,7 @@ export const Map = () => {
       zoom={11}
       scrollWheelZoom={true}
     >
-      <GetTiles />
+      <AirQualityMarkers />
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         url='https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}.png'
