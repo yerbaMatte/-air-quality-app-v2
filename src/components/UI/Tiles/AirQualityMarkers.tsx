@@ -40,5 +40,3 @@ function GetTiles() {
 }
 
 export default GetTiles;
-
-//
