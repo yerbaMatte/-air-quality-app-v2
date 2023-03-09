@@ -1,4 +1,4 @@
-import { dataFetcher } from '../../HelperFunctions/dataFetcher';
+import { markersFetcher } from '../../HelperFunctions/dataFetcher';
 import { useMap } from 'react-leaflet';
 import { useEffect } from 'react';
 import { useQueryClient, useQuery, QueryClient } from 'react-query';
@@ -14,7 +14,7 @@ function GetTiles() {
 
   const { data: tilesData, isSuccess } = useQuery(
     ['Tailes'],
-    () => dataFetcher(southWest, northEast),
+    () => markersFetcher(southWest, northEast),
     {
       initialData: undefined,
     }
@@ -26,7 +26,7 @@ function GetTiles() {
       const bounds = map.getBounds();
       const southWest = [bounds.getSouth(), bounds.getWest()];
       const northEast = [bounds.getNorth(), bounds.getEast()];
-      const newData = await dataFetcher(southWest, northEast);
+      const newData = await markersFetcher(southWest, northEast);
       queryClient.setQueryData(['Tailes'], newData);
     };
     map.on('moveend', onMoveEnd);

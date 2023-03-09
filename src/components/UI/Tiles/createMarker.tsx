@@ -2,6 +2,7 @@ import { Marker } from 'react-leaflet';
 import ReactDOMServer from 'react-dom/server';
 import SVGIcon from './qualityIconHTML';
 import qualityIconColor from './qualityIconColor';
+import { getHistoricData } from '../../HelperFunctions/dataFetcher';
 import L from 'leaflet';
 
 type MarkerType = {
@@ -12,10 +13,6 @@ type MarkerType = {
   uid: number;
   // aqi -> "air quality index - the result"
   aqi: string;
-};
-
-const letsTest = () => {
-  console.log('CLICKED!');
 };
 
 // develop a single custom AQI Marker Element
@@ -33,17 +30,28 @@ const createMarkerElement = (tile: MarkerType) => {
     ),
   });
 
+  // markersFetcher
+
   function handleClick() {
     // Do something when the marker is clicked
-    console.log('Marker clicked!');
+    console.log(' clicked!');
   }
+
+  const handleClickWithUid = (uid: number) => {
+    return (event: boolean) => {
+      console.log(event);
+      // Execute the desired function with tile.uid as a parameter
+      console.log(`Tile's uid: ${uid}`);
+      getHistoricData(uid);
+    };
+  };
 
   return (
     <Marker
       key={tile.uid}
       position={[tile.lat, tile.lon]}
       icon={icon}
-      eventHandlers={{ click: handleClick }}
+      eventHandlers={{ click: handleClickWithUid(tile.uid) }}
     />
   );
 };
