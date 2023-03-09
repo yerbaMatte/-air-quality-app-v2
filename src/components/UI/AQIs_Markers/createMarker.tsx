@@ -13,11 +13,13 @@ type MarkerType = {
   uid: string;
   // aqi -> "air quality index - the result"
   aqi: string;
+  // get location name
+  station: { name: string };
 };
 
 // develop a single custom AQI Marker Element
-const createMarkerElement = (tile: MarkerType) => {
-  const aqiNumber = parseInt(tile.aqi, 10);
+const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
+  const aqiNumber = parseInt(aqi, 10);
   // if the given measuring station does not have a result - skip this station
   if (!aqiNumber) return;
   // determine the marker color based on aqi index
@@ -30,17 +32,13 @@ const createMarkerElement = (tile: MarkerType) => {
     ),
   });
 
-  // markersFetcher
-
   function handleClick() {
-    // Do something when the marker is clicked
     console.log(' clicked!');
   }
 
   const handleClickWithUid = (uid: string) => {
     return (event: LeafletMouseEvent) => {
       console.log(event);
-      console.log(typeof uid);
       // Execute the desired function with tile.uid as a parameter
       console.log(`Tile's uid: ${uid}`);
       getHistoricData(uid);
@@ -49,12 +47,12 @@ const createMarkerElement = (tile: MarkerType) => {
 
   return (
     <Marker
-      key={tile.uid}
-      position={[tile.lat, tile.lon]}
+      key={uid}
+      position={[lat, lon]}
       icon={icon}
-      eventHandlers={{ click: handleClickWithUid(tile.uid) }}
+      eventHandlers={{ click: handleClickWithUid(uid) }}
     >
-      <Popup></Popup>
+      <Popup>{station.name}</Popup>
     </Marker>
   );
 };
@@ -62,16 +60,12 @@ const createMarkerElement = (tile: MarkerType) => {
 // create JSX element with all fetched markers data
 export const renderMarker = (tilesData: { data: MarkerType[] }) => {
   const tiles = tilesData.data;
+  console.log(tiles);
   return (
     <>
-      {tiles.map((tile: MarkerType) =>
-        createMarkerElement({
-          lat: tile.lat,
-          lon: tile.lon,
-          uid: tile.uid,
-          aqi: tile.aqi,
-        })
-      )}
+      {tiles.map((tile: MarkerType) => {
+        return createMarkerElement(tile);
+      })}
     </>
   );
 };
