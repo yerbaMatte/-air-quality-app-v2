@@ -12,7 +12,7 @@ export const markersFetcher = async (
   return data;
 };
 
-export const getHistoricData = async (uid: number) => {
+export const getHistoricData = async (uid: string) => {
   const response = await axios.get(
     `https://api.waqi.info/api/attsse/${uid}/yd.json`
   );

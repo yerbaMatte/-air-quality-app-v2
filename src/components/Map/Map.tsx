@@ -1,6 +1,6 @@
 import { MapContainer, TileLayer } from 'react-leaflet';
 import './Map.css';
-import AirQualityMarkers from '../UI/Tiles/AirQualityMarkers';
+import AirQualityMarkers from '../UI/AQIs_Markers/AirQualityMarkers';
 
 export const Map = () => {
   console.log('Map');
