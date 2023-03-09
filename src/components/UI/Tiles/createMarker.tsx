@@ -14,6 +14,10 @@ type MarkerType = {
   aqi: string;
 };
 
+const letsTest = () => {
+  console.log('CLICKED!');
+};
+
 // develop a single custom AQI Marker Element
 const createMarkerElement = (tile: MarkerType) => {
   const aqiNumber = parseInt(tile.aqi, 10);
@@ -29,7 +33,19 @@ const createMarkerElement = (tile: MarkerType) => {
     ),
   });
 
-  return <Marker key={tile.uid} position={[tile.lat, tile.lon]} icon={icon} />;
+  function handleClick() {
+    // Do something when the marker is clicked
+    console.log('Marker clicked!');
+  }
+
+  return (
+    <Marker
+      key={tile.uid}
+      position={[tile.lat, tile.lon]}
+      icon={icon}
+      eventHandlers={{ click: handleClick }}
+    />
+  );
 };
 
 // create JSX element with all fetched markers data
