@@ -58,7 +58,7 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
         className='popup-content'
         autoPanPadding={[20, 20]}
       >
-        <CustomPopUp station={station} />
+        <CustomPopUp station={station} color={colorString} />
       </Popup>
     </Marker>
   );
