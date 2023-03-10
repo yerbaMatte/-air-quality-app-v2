@@ -1,8 +1,8 @@
 import { markersFetcher } from '../../HelperFunctions/dataFetcher';
 import { useMap } from 'react-leaflet';
 import { useEffect } from 'react';
-import { useQueryClient, useQuery, QueryClient } from 'react-query';
-import { renderMarker } from './createMarker';
+import { useQueryClient, useQuery } from 'react-query';
+import { renderMarker } from './MarkerCreator/createMarker';
 
 function GetTiles() {
   const map = useMap();

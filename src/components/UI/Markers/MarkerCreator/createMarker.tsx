@@ -2,8 +2,9 @@ import { Marker, Popup } from 'react-leaflet';
 import ReactDOMServer from 'react-dom/server';
 import SVGIcon from './qualityIconHTML';
 import qualityIconColor from './qualityIconColor';
-import { getHistoricData } from '../../HelperFunctions/dataFetcher';
+import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
 import L, { LeafletMouseEvent } from 'leaflet';
+import { Button, ButtonGroup } from '@chakra-ui/react';
 
 type MarkerType = {
   // latitude and longitude
@@ -38,7 +39,6 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
 
   const handleClickWithUid = (uid: string) => {
     return (event: LeafletMouseEvent) => {
-      console.log(event);
       // Execute the desired function with tile.uid as a parameter
       console.log(`Tile's uid: ${uid}`);
       getHistoricData(uid);
@@ -52,7 +52,9 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
       icon={icon}
       eventHandlers={{ click: handleClickWithUid(uid) }}
     >
-      <Popup>{station.name}</Popup>
+      <Popup offset={[15, 0]}>
+        <h1>{station.name}</h1>
+      </Popup>
     </Marker>
   );
 };
@@ -60,7 +62,6 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
 // create JSX element with all fetched markers data
 export const renderMarker = (tilesData: { data: MarkerType[] }) => {
   const tiles = tilesData.data;
-  console.log(tiles);
   return (
     <>
       {tiles.map((tile: MarkerType) => {

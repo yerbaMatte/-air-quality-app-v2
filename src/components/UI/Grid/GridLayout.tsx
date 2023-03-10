@@ -1,5 +1,5 @@
 import { gridSettings } from './gridSettings';
-import { Grid, GridItem, Button } from '@chakra-ui/react';
+import { Grid, GridItem } from '@chakra-ui/react';
 import { Map } from '../../Map/Map';
 
 const GridLayout = () => {
