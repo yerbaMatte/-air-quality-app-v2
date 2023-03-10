@@ -1,3 +1,4 @@
+import moment from 'moment';
 import {
   Flex,
   Spacer,
@@ -10,8 +11,9 @@ import {
 export const CustomPopUp = ({ station, color }) => {
   console.log(station);
 
-  let date = new Date(station.time);
-
+  let date = moment(station.time);
+  let now = moment();
+  const dist = now.diff(date, 'minutes');
   let options = {
     year: 'numeric',
     month: 'long',
@@ -22,7 +24,7 @@ export const CustomPopUp = ({ station, color }) => {
   };
 
   let dateString = date.toLocaleString('en-US', options);
-  console.log(dateString);
+  console.log(dist);
 
   return (
     <>
@@ -30,14 +32,12 @@ export const CustomPopUp = ({ station, color }) => {
         <Box p='min-content' w='100%' bg='rgba(67, 78, 102, 0.131)'>
           <Heading size='sm'>{station.name}</Heading>
         </Box>
-        <Box flex='1' bg={color}>
-          AIR QUALITY NUMBER + SMILE + GREAT/NOT
-        </Box>
-        <Box flex='1'>
+        <Box bg={color}>AIR QUALITY NUMBER + SMILE + GREAT/NOT</Box>
+        <Box textAlign={'center'}>
           <h2>updated </h2>
           <p>({dateString})</p>
         </Box>
-        <Box flex='1'>DISPLAY HISTORICAL DATA</Box>
+        <Box>DISPLAY HISTORICAL DATA</Box>
         <Spacer />
       </Flex>
     </>
