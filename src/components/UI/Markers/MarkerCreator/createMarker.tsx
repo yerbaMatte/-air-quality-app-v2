@@ -4,7 +4,7 @@ import SVGIcon from './qualityIconHTML';
 import qualityIconColor from './qualityIconColor';
 import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
 import L, { LeafletMouseEvent } from 'leaflet';
-import { Button, ButtonGroup } from '@chakra-ui/react';
+import { CustomPopUp } from '../PopupWindow/CustomPopUp';
 
 type MarkerType = {
   // latitude and longitude
@@ -52,8 +52,13 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
       icon={icon}
       eventHandlers={{ click: handleClickWithUid(uid) }}
     >
-      <Popup offset={[15, 0]}>
-        <h1>{station.name}</h1>
+      <Popup
+        offset={[17, 0]}
+        position={[lat, lon]}
+        className='popup-content'
+        autoPanPadding={[20, 20]}
+      >
+        <CustomPopUp station={station} />
       </Popup>
     </Marker>
   );
