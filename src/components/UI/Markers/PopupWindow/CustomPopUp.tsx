@@ -8,22 +8,17 @@ import {
   Box,
 } from '@chakra-ui/react';
 
-export const CustomPopUp = ({ station, color }) => {
-  console.log(station);
-
-  let date = moment(station.time);
+export const CustomPopUp = ({
+  station,
+  color,
+}: {
+  station: { time: string; name: string };
+  color: string;
+}) => {
+  let updateTime = moment(station.time);
   let now = moment();
-  const dist = now.diff(date, 'minutes');
-  let options = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-    hour: '2-digit',
-    minute: '2-digit',
-    hour12: false,
-  };
-
-  let dateString = date.toLocaleString('en-US', options);
+  const dist = now.diff(updateTime, 'minutes');
+  let dateString = moment().format('dddd, MMMM Do YYYY, h:mm a');
   console.log(dist);
 
   return (
@@ -34,7 +29,7 @@ export const CustomPopUp = ({ station, color }) => {
         </Box>
         <Box bg={color}>AIR QUALITY NUMBER + SMILE + GREAT/NOT</Box>
         <Box textAlign={'center'}>
-          <h2>updated </h2>
+          <h2>updated {dist} minutes ago</h2>
           <p>({dateString})</p>
         </Box>
         <Box>DISPLAY HISTORICAL DATA</Box>

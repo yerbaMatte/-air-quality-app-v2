@@ -15,7 +15,7 @@ type MarkerType = {
   // aqi -> "air quality index - the result"
   aqi: string;
   // get location name
-  station: { name: string };
+  station: { time: string; name: string };
 };
 
 // develop a single custom AQI Marker Element
