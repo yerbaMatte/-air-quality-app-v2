@@ -5,6 +5,7 @@ import qualityIndicator from './qualityIndicator';
 import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
 import L, { LeafletMouseEvent } from 'leaflet';
 import { CustomPopUp } from '../PopupWindow/CustomPopUp';
+import '../../../Map/Map.css';
 
 type MarkerType = {
   // latitude and longitude
@@ -48,12 +49,7 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
       icon={icon}
       eventHandlers={{ click: handleClickWithUid(uid) }}
     >
-      <Popup
-        offset={[17, 0]}
-        position={[lat, lon]}
-        className='popup-content'
-        autoPanPadding={[20, 20]}
-      >
+      <Popup offset={[17, 0]} position={[lat, lon]} className='custom-popup'>
         <CustomPopUp
           station={station}
           colorAndComment={colorAndComment}

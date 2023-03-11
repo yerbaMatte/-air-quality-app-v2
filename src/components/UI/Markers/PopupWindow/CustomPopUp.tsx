@@ -18,38 +18,38 @@ export const CustomPopUp = ({
 
   return (
     <>
-      <Flex w='100%' flexDirection={'column'} m='-1'>
+      <Flex w='100%' flexDirection='column' m='-0.5' gap={1.5}>
         <Box w='100%' p='1'>
-          <Heading as='h2' size='sm'>
-            {station.name}
-          </Heading>
+          <Flex justify='space-between' align='center' m='-0'>
+            <Heading as='h2' fontSize='16px'>
+              {station.name}
+            </Heading>
+            <Text p={1} fontSize='30px'>
+              {colorAndComment.emoji}
+            </Text>
+          </Flex>
         </Box>
-        <Box
-          bg={colorAndComment.color}
-          p='1'
-          textAlign={'center'}
-          fontSize='lg'
-        >
+        <Box bg={colorAndComment.color} p='1' textAlign='center' fontSize='lg'>
           <Flex
-            gap='7'
             justify='center'
             align='center'
             color={colorAndComment.comment === 'Moderate' ? '#000' : '#FFF'}
+            p='1'
           >
             <Text>
               {aq} - {colorAndComment.comment}
             </Text>
-            <Text fontSize='30px'>{colorAndComment.emoji}</Text>
           </Flex>
         </Box>
-        <Box textAlign={'center'}>
-          <Text as='i' fontSize='xs'>
+        <Box textAlign='center' w='100%'>
+          <Text as='i' fontSize='s'>
             updated {dist} minutes ago
           </Text>
-          <Text>({dateString})</Text>
+          <Text fontSize='xs' whiteSpace='nowrap'>
+            ({dateString})
+          </Text>
         </Box>
-        <Box>DISPLAY HISTORICAL DATA</Box>
-        <Spacer />
+        {/* <Box>DISPLAY HISTORICAL DATA</Box> */}
       </Flex>
     </>
   );
