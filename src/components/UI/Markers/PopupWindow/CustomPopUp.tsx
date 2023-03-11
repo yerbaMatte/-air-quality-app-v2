@@ -1,19 +1,14 @@
 import moment from 'moment';
-import {
-  Flex,
-  Spacer,
-  ButtonGroup,
-  Heading,
-  Button,
-  Box,
-} from '@chakra-ui/react';
+import { Flex, Spacer, Heading, Box, Text } from '@chakra-ui/react';
 
 export const CustomPopUp = ({
   station,
-  color,
+  colorAndComment,
+  aq,
 }: {
   station: { time: string; name: string };
-  color: string;
+  colorAndComment: { color: string; comment: string; emoji: string };
+  aq: number;
 }) => {
   let updateTime = moment(station.time);
   let now = moment();
@@ -24,13 +19,34 @@ export const CustomPopUp = ({
   return (
     <>
       <Flex w='100%' flexDirection={'column'} m='-1'>
-        <Box p='min-content' w='100%' bg='rgba(67, 78, 102, 0.131)'>
-          <Heading size='sm'>{station.name}</Heading>
+        <Box w='100%' p='1'>
+          <Heading as='h2' size='sm'>
+            {station.name}
+          </Heading>
         </Box>
-        <Box bg={color}>AIR QUALITY NUMBER + SMILE + GREAT/NOT</Box>
+        <Box
+          bg={colorAndComment.color}
+          p='1'
+          textAlign={'center'}
+          fontSize='lg'
+        >
+          <Flex
+            gap='7'
+            justify='center'
+            align='center'
+            color={colorAndComment.comment === 'Moderate' ? '#000' : '#FFF'}
+          >
+            <Text>
+              {aq} - {colorAndComment.comment}
+            </Text>
+            <Text fontSize='30px'>{colorAndComment.emoji}</Text>
+          </Flex>
+        </Box>
         <Box textAlign={'center'}>
-          <h2>updated {dist} minutes ago</h2>
-          <p>({dateString})</p>
+          <Text as='i' fontSize='xs'>
+            updated {dist} minutes ago
+          </Text>
+          <Text>({dateString})</Text>
         </Box>
         <Box>DISPLAY HISTORICAL DATA</Box>
         <Spacer />

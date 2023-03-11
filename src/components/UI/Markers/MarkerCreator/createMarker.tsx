@@ -1,7 +1,7 @@
 import { Marker, Popup } from 'react-leaflet';
 import ReactDOMServer from 'react-dom/server';
 import SVGIcon from './qualityIconHTML';
-import qualityIconColor from './qualityIconColor';
+import qualityIndicator from './qualityIndicator';
 import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
 import L, { LeafletMouseEvent } from 'leaflet';
 import { CustomPopUp } from '../PopupWindow/CustomPopUp';
@@ -24,18 +24,14 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
   // if the given measuring station does not have a result - skip this station
   if (!aqiNumber) return;
   // determine the marker color based on aqi index
-  const colorString = qualityIconColor(aqiNumber);
+  const colorAndComment = qualityIndicator(aqiNumber);
   // create custom marker
   const icon = L.divIcon({
     className: 'custom-icon',
     html: ReactDOMServer.renderToString(
-      <SVGIcon perc={aqiNumber} iconColor={colorString} />
+      <SVGIcon perc={aqiNumber} iconColor={colorAndComment.color} />
     ),
   });
-
-  function handleClick() {
-    console.log(' clicked!');
-  }
 
   const handleClickWithUid = (uid: string) => {
     return (event: LeafletMouseEvent) => {
@@ -58,7 +54,11 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
         className='popup-content'
         autoPanPadding={[20, 20]}
       >
-        <CustomPopUp station={station} color={colorString} />
+        <CustomPopUp
+          station={station}
+          colorAndComment={colorAndComment}
+          aq={aqiNumber}
+        />
       </Popup>
     </Marker>
   );
