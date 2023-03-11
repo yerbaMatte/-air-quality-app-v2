@@ -1,5 +1,6 @@
 import moment from 'moment';
-import { Flex, Spacer, Heading, Box, Text } from '@chakra-ui/react';
+import { Flex, Spacer, Heading, Box, Text, Button } from '@chakra-ui/react';
+import convertTime from './../../../HelperFunctions/convertTime';
 import '../../../Map/Map.css';
 
 export const CustomPopUp = ({
@@ -15,7 +16,6 @@ export const CustomPopUp = ({
   let now = moment();
   const dist = now.diff(updateTime, 'minutes');
   let dateString = moment().format('dddd, MMMM Do YYYY, h:mm a');
-  console.log(dist);
 
   return (
     <>
@@ -55,13 +55,20 @@ export const CustomPopUp = ({
             <Text color='#707070' as='span'>
               updated
             </Text>{' '}
-            {dist} minutes ago
+            {convertTime(dist)}
           </Text>
           <Text fontSize='xs' whiteSpace='nowrap' color='#707070'>
             ({dateString})
           </Text>
         </Box>
-        {/* <Box>DISPLAY HISTORICAL DATA</Box> */}
+        <Flex justify='space-around' mt='6px'>
+          <Button bg='#bdbdbda8' fontSize='xs' height='18px'>
+            Historical data
+          </Button>
+          <Button bg='#bdbdbda8' fontSize='xs' height='18px'>
+            Save location
+          </Button>
+        </Flex>
       </Flex>
     </>
   );
