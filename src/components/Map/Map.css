@@ -8,18 +8,20 @@
   padding: 0;
 }
 
-.leaflet-popup-content {
-  /* margin: 24pxpx; */
-}
-
 .custom-popup .leaflet-popup-content {
-  /* margin: 0; */
+  margin: 12px;
 }
 
 .custom-popup .leaflet-popup-content-wrapper {
-  max-width: none;
+  background-color: rgba(255, 255, 255, 0.873);
+  overflow: hidden;
 }
 
-.custom-popup .leaflet-popup-tip {
+.custom-popup .leaflet-popup-close-button {
   display: none;
+}
+
+.custom-bar {
+  margin-left: -20px;
+  margin-right: -20px;
 }
