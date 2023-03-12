@@ -18,5 +18,3 @@ export const Map = () => {
     </MapContainer>
   );
 };
-
-// Historical data visualization: You can use charting libraries like Chart.js or D3.js to display historical air quality data. This would help users understand the trend of air quality over time.

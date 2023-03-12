@@ -1,6 +1,7 @@
 import { gridSettings } from './gridSettings';
 import { Grid, GridItem } from '@chakra-ui/react';
 import { Map } from '../../Map/Map';
+import { createContext, useState } from 'react';
 
 const GridLayout = () => {
   return (
@@ -8,9 +9,7 @@ const GridLayout = () => {
       <GridItem bg='#f4f4f9' area={'header'}>
         Header
       </GridItem>
-      <GridItem bg='#b8dbd9' area={'control-side'}>
-        control-side
-      </GridItem>
+      <GridItem bg='#b8dbd9' area={'control-side'}></GridItem>
       <GridItem bg='#000' area={'map-side'}>
         <Map />
       </GridItem>
