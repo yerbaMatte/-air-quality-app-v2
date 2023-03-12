@@ -5,13 +5,13 @@ The Air Quality App is a web application that provides real-time air quality dat
 
 <p>🛠 To build this app, I used a combination of technologies including:</p>
 <ul>
-<li>• React </li>
-<li>• Axios </li>
-<li>• Leaflet </li>
-<li>• React-Leaflet </li>
-<li>• Chart.js </li>
-<li>• moment.js</li>
-<li>• react-query</li>
+<li>React </li>
+<li>Axios </li>
+<li>Leaflet </li>
+<li>React-Leaflet </li>
+<li>Chart.js </li>
+<li>moment.js</li>
+<li>react-query</li>
 </ul>
 
 <p>These technologies allow the app to fetch and display air quality data in an interactive and user-friendly way.</p>
