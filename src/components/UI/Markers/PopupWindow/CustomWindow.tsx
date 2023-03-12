@@ -1,22 +1,33 @@
 import moment from 'moment';
 import { Flex, Spacer, Heading, Box, Text, Button } from '@chakra-ui/react';
-import convertTime from './../../../HelperFunctions/convertTime';
+import {
+  convertTime,
+  currentDateString,
+} from '../../../HelperFunctions/convertTime';
 import '../../../Map/Map.css';
+import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
 
 export const CustomPopUp = ({
+  // PROPS
   station,
   colorAndComment,
   aq,
+  uid,
 }: {
   station: { time: string; name: string };
   colorAndComment: { color: string; comment: string; emoji: string };
   aq: number;
+  uid: string;
+  //
 }) => {
+  //
+  // when last station update was
   let updateTime = moment(station.time);
+  // current time
   let now = moment();
+  // how long since the last update
   const dist = now.diff(updateTime, 'minutes');
-  let dateString = moment().format('dddd, MMMM Do YYYY, h:mm a');
-
+  //
   return (
     <>
       <Flex w='100%' flexDirection='column' m='-0.5' gap={1.5}>
@@ -58,11 +69,16 @@ export const CustomPopUp = ({
             {convertTime(dist)}
           </Text>
           <Text fontSize='xs' whiteSpace='nowrap' color='#707070'>
-            ({dateString})
+            ({currentDateString})
           </Text>
         </Box>
         <Flex justify='space-around' mt='6px'>
-          <Button bg='#bdbdbda8' fontSize='xs' height='18px'>
+          <Button
+            bg='#bdbdbda8'
+            fontSize='xs'
+            height='18px'
+            onClick={() => getHistoricData(uid)}
+          >
             Historical data
           </Button>
           <Button bg='#bdbdbda8' fontSize='xs' height='18px'>

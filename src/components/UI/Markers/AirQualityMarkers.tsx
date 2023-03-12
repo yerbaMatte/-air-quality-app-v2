@@ -2,7 +2,7 @@ import { markersFetcher } from '../../HelperFunctions/dataFetcher';
 import { useMap } from 'react-leaflet';
 import { useEffect } from 'react';
 import { useQueryClient, useQuery } from 'react-query';
-import { renderMarker } from './MarkerCreator/createMarker';
+import { renderMarkers } from './MarkerCreator/createMarker';
 
 function GetTiles() {
   // determine current map viewport based on map instance
@@ -41,7 +41,7 @@ function GetTiles() {
     };
   }, [map]);
 
-  return <>{isSuccess && renderMarker(tilesData)}</>;
+  return <>{isSuccess && renderMarkers(tilesData)}</>;
 }
 
 export default GetTiles;

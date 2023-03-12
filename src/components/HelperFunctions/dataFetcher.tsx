@@ -18,14 +18,14 @@ export const getHistoricData = async (uid: string) => {
   );
   const data = response.data;
 
+  // Unexpected token 'e', "event: deb"... is not valid JSON
+  // const dataJson = JSON.parse(data);
+
   console.log(data);
   return data;
 };
 
-// ????? new EventSource ?????
-
-// token
-// b4a90c69db861da6fd209f61dcbf5d8f1b874f57
+// ?? new EventSource ??
 
 // HISTORICAL DATA ---> different fetched data :
 // SAMPLE --> SSE - stream of server-sent or 'EventSource' data

@@ -1,4 +1,6 @@
-export default function convertTime(dist: number) {
+import moment from 'moment';
+
+export function convertTime(dist: number) {
   let days = 0;
   let hours = 0;
   let minutes = 0;
@@ -43,3 +45,5 @@ export default function convertTime(dist: number) {
 
   return result.trim();
 }
+
+export const currentDateString = moment().format('dddd, MMMM Do YYYY, h:mm a');

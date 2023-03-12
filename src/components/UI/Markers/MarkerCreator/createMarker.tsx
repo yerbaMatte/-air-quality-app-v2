@@ -2,9 +2,8 @@ import { Marker, Popup } from 'react-leaflet';
 import ReactDOMServer from 'react-dom/server';
 import SVGIcon from './qualityIconHTML';
 import qualityIndicator from './qualityIndicator';
-import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
-import L, { LeafletMouseEvent } from 'leaflet';
-import { CustomPopUp } from '../PopupWindow/CustomPopUp';
+import L from 'leaflet';
+import { CustomPopUp } from '../PopupWindow/CustomWindow';
 import '../../../Map/Map.css';
 
 type MarkerType = {
@@ -33,34 +32,22 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
     ),
   });
 
-  const handleClickWithUid = (uid: string) => {
-    return (event: LeafletMouseEvent) => {
-      // Execute the desired function with tile.uid as a parameter
-      console.log(`Tile's uid: ${uid}`);
-      getHistoricData(uid).then((data) => console.log(data));
-    };
-  };
-
   return (
-    <Marker
-      key={uid}
-      position={[lat, lon]}
-      icon={icon}
-      eventHandlers={{ click: handleClickWithUid(uid) }}
-    >
+    <Marker key={uid} position={[lat, lon]} icon={icon}>
       <Popup offset={[17, 0]} position={[lat, lon]} className='custom-popup'>
         <CustomPopUp
           station={station}
           colorAndComment={colorAndComment}
           aq={aqiNumber}
+          uid={uid}
         />
       </Popup>
     </Marker>
   );
 };
 
-// create JSX element with all fetched markers data
-export const renderMarker = (tilesData: { data: MarkerType[] }) => {
+// create and display ALL markers from fetched data
+export const renderMarkers = (tilesData: { data: MarkerType[] }) => {
   const tiles = tilesData.data;
   return (
     <>
