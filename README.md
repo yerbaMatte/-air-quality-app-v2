@@ -12,6 +12,7 @@ The Air Quality App is a web application that provides real-time air quality dat
 <li>Chart.js </li>
 <li>moment.js</li>
 <li>react-query</li>
+<li>Vite.js</li>  
 </ul>
 
 <p>These technologies allow the app to fetch and display air quality data in an interactive and user-friendly way.</p>
