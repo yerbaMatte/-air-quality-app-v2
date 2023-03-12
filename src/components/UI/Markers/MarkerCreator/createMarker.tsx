@@ -8,25 +8,24 @@ import { CustomPopUp } from '../PopupWindow/CustomPopUp';
 import '../../../Map/Map.css';
 
 type MarkerType = {
-  // latitude and longitude
+  // latitude and longitude; uid: "Unique Station ID"; aqi: "air quality index - current result"; station: name and data fetched time
   lat: number;
   lon: number;
-  // uid -> "Unique Station ID"
   uid: string;
-  // aqi -> "air quality index - the result"
   aqi: string;
-  // get location name
   station: { time: string; name: string };
 };
 
 // develop a single custom AQI Marker Element
 const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
+  //convert 'aqi' string to number
   const aqiNumber = parseInt(aqi, 10);
   // if the given measuring station does not have a result - skip this station
   if (!aqiNumber) return;
-  // determine the marker color based on aqi index
+  //
+  // determine the marker color and comment based on aqi index
   const colorAndComment = qualityIndicator(aqiNumber);
-  // create custom marker
+  // create a custom marker for aqi marker
   const icon = L.divIcon({
     className: 'custom-icon',
     html: ReactDOMServer.renderToString(
@@ -38,7 +37,7 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
     return (event: LeafletMouseEvent) => {
       // Execute the desired function with tile.uid as a parameter
       console.log(`Tile's uid: ${uid}`);
-      getHistoricData(uid);
+      getHistoricData(uid).then((data) => console.log(data));
     };
   };
 

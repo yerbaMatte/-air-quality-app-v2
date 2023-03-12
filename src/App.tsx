@@ -18,7 +18,6 @@ function App() {
 export default App;
 
 /*
-Features
 3/3
 Air quality news: Implement a feature that displays the latest air quality-related news articles from credible sources. You can use APIs provided by news organizations or use web scraping techniques to fetch the news.
 Air quality index calculation: Implement a feature that calculates the air quality index based on various pollutants like PM2.5, ozone, etc. You can use the Air Quality Index (AQI) formula for this.
