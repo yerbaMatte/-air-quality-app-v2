@@ -1,9 +1,9 @@
-# Air Quality App 🌤
+<h2># Air Quality App 🌤</h2>
 
-Hello and welcome to the Air Quality App! 👋🏻
+<p>Hello and welcome to the Air Quality App! 👋🏻</p>
 The Air Quality App is a web application that provides real-time air quality data from around the world.
 
-🛠 To build this app, I used a combination of technologies including:
+<p>🛠 To build this app, I used a combination of technologies including:</p>
 • React 
 • Axios 
 • Leaflet 
