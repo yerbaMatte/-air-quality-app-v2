@@ -46,7 +46,7 @@ const createMarkerElement = ({ lat, lon, uid, aqi, station }: MarkerType) => {
   );
 };
 
-// create and display ALL markers from fetched data
+/// create and display ALL markers from fetched data
 export const renderMarkers = (tilesData: { data: MarkerType[] }) => {
   const tiles = tilesData.data;
   return (
