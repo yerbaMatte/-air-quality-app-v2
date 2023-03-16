@@ -84,7 +84,6 @@ export const CustomPopUp = ({
           <Button bg='#bdbdbda8' fontSize='xs' height='18px'>
             Save location
           </Button>
-          <Button>TEST LINUX</Button>
         </Flex>
       </Flex>
     </>
