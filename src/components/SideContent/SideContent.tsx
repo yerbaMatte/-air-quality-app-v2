@@ -1,5 +1,7 @@
-import { useContext } from 'react';
+import { useContent } from '../Context/context';
 
 export const SideContent = () => {
-  return <></>;
+  const { content, setContent } = useContent();
+
+  return <div>{content}</div>;
 };
