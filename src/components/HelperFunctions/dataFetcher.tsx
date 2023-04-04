@@ -12,16 +12,18 @@ export const markersFetcher = async (
   return data;
 };
 
-export const getHistoricData = async (uid: string) => {
+export const getHistoricData = async (
+  uid: string,
+  setContent: React.Dispatch<React.SetStateAction<string>>
+) => {
   const response = await axios.get(
     `https://api.waqi.info/api/attsse/${uid}/yd.json`
   );
   const data = response.data;
 
-  // Unexpected token 'e', "event: deb"... is not valid JSON
-  // const dataJson = JSON.parse(data);
-
   console.log(data);
+  setContent('Historical Data');
+
   return data;
 };
 

@@ -6,6 +6,7 @@ import {
 } from '../../../HelperFunctions/convertTime';
 import '../../../Map/Map.css';
 import { getHistoricData } from '../../../HelperFunctions/dataFetcher';
+import { useContent } from './../../../Context/context';
 
 export const CustomPopUp = ({
   // PROPS
@@ -27,6 +28,8 @@ export const CustomPopUp = ({
   let now = moment();
   // how long since the last update
   const dist = now.diff(updateTime, 'minutes');
+  //
+  const { setContent } = useContent();
   //
   return (
     <>
@@ -77,7 +80,7 @@ export const CustomPopUp = ({
             bg='#bdbdbda8'
             fontSize='xs'
             height='18px'
-            onClick={() => getHistoricData(uid)}
+            onClick={() => getHistoricData(uid, setContent)}
           >
             Historical data
           </Button>
